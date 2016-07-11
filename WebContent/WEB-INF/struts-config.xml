@@ -35,7 +35,7 @@
        		<forward name="fail" path="/listall.do"></forward>
        </action>
        <action path="/updatedo" type="org.javachina.shangpin.view.action.UpdateDoAction" name="updateDoForm">
-       		
+       		<forward name="success" path="/listall.do"></forward>
        </action>
     </action-mappings>
 

@@ -19,7 +19,8 @@ public class UpdateDoAction extends Action {
 		if(isValid){
 			
 			UpdateDoForm upForm = (UpdateDoForm)form;
-			ShangpinDto sp = new ShangpinDto(upForm.getId(), upForm.getName(), upForm.getPrice(), upForm.getIntputDate(), upForm.getLeixingId());
+			String name = new String(upForm.getName().getBytes("iso8859-1"), "utf-8");
+			ShangpinDto sp = new ShangpinDto(upForm.getId(), name, upForm.getPrice(), upForm.getIntputDate(), upForm.getLeixingId());
 			UpdateDoService service = new UpdateDoService();
 			boolean isSuccess = service.updateSp(sp);
 			String msg = null;
@@ -29,10 +30,11 @@ public class UpdateDoAction extends Action {
 				msg="更新失败";
 			}
 			request.setAttribute("msg", msg);
-			mapping.findForward("success");
 		}else{
 			request.setAttribute("msg", "请勿重复提交");
 		}
+		return mapping.findForward("success");
+
 	}
 
 }

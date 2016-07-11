@@ -101,13 +101,15 @@ public class ShangpinDao extends BaseDao {
 		int i = 0;
 		Connection conn = this.getConnection();
 		PreparedStatement psmt = null;
-		String sql = "update shangpin set name=?,price=?,inputdate=?,leixingid=?";
+		String sql = "update shangpin set name=?,price=?,inputdate=?,leixingid=? where id=?";
 		try {
+			psmt = conn.prepareStatement(sql);
 			psmt.setString(1, dto.getName());
 			psmt.setDouble(2, dto.getPrice());
 			psmt.setDate(3, dto.getInputDate());
 			psmt.setInt(4, dto.getLeixingId());
-			i = psmt.executeUpdate(sql);
+			psmt.setInt(5, dto.getId());
+			i = psmt.executeUpdate();
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
